@@ -8,6 +8,7 @@ import SingIn from './Screen/SingIn';
 import Login from './Screen/Login';
 import Loader from './Screen/Loader';
 
+
 function App(): React.JSX.Element {
   const Stack = createStackNavigator();
   return (
@@ -19,7 +20,7 @@ function App(): React.JSX.Element {
         backgroundColor="transparent"
         translucent={true}
       />
-        <Stack.Navigator initialRouteName="Welcome" screenOptions={{headerShown:false}}>
+        <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown:false}}>
           <Stack.Screen name="Welcome" component={Welcome}/>
           <Stack.Screen name="SingIn" component={SingIn}/>
           <Stack.Screen name="Login" component={Login}/>
