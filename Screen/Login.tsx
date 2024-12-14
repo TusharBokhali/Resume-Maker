@@ -1,8 +1,16 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { View, Text, StyleSheet, StatusBar, Image, TextInput, TouchableOpacity } from 'react-native';
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import {useNavigation} from '@react-navigation/native';
+import Animated, { FadeIn, FadeInDown, FadeInLeft, FadeInUp } from 'react-native-reanimated'
 export default function Login() {
+  const {navigate} = useNavigation();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [borders,setborders] = useState(false)
+  
+
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -10,36 +18,50 @@ export default function Login() {
         backgroundColor="transparent"
         translucent={true}
       />
-      <View style={styles.Main}>
-        <Image source={require('../assets/image/RESUMEONG.png')}
-          style={{ width: 200, height: 200, alignSelf: 'center' }}
+      <Animated.View style={styles.Main} entering={FadeInUp.delay(400).duration(700)}>
+        <Animated.Image entering={FadeInUp.delay(300).duration(600)} source={require('../assets/image/3dCaroon.png')}
+          style={{ width: 300, height: 300, alignSelf: 'center' }}
           resizeMode='contain'
         />
-        <Text style={{ marginVertical: 10 }}>Email</Text>
-        <View style={styles.InputType}>
-          <TextInput style={styles.Input} placeholder='Enter Email' />
-        </View>
+        <Animated.Text entering={FadeInLeft.delay(300).duration(600)}  style={{ marginVertical: 10 }}>Email</Animated.Text>
+        <Animated.View entering={FadeInLeft.delay(300).duration(600)} style={[styles.InputType]} >
+          <TextInput style={[styles.Input]} placeholder='Enter Email' onPress={()=>setborders(true)} />
+        </Animated.View>
 
-        <Text style={{ marginVertical: 10 }}>Password</Text>
-        <View style={styles.InputType}>
-          <TextInput style={styles.Input} placeholder='Enter Password' />
-        </View>
+        <Animated.Text  entering={FadeInLeft.delay(300).duration(600)} style={{ marginVertical: 10 }}>Password</Animated.Text>
+        <Animated.View entering={FadeInLeft.delay(300).duration(600)} style={styles.InputType}>
+          <TextInput style={styles.Input} placeholder='Enter Password' onPress={()=>setborders(true)} />
+        </Animated.View>
         <TouchableOpacity>
-          <Text style={{ textAlign: 'right' ,marginBottom:70}}>Forgot Password?</Text>
+          <Text style={{ textAlign: 'right' ,marginBottom:40}}>Forgot Password?</Text>
         </TouchableOpacity>
+        <Animated.View entering={FadeIn.delay(400).duration(700)}>
         <TouchableOpacity style={styles.BTN}>
           <Text style={{ textAlign: 'center', color: 'white', fontSize: 18, fontWeight: '600' }}>Login</Text>
         </TouchableOpacity>
-      </View>
-        <View style={{flexDirection:'row',justifyContent:'space-around',paddingHorizontal:50,marginTop:20}}>
-          <View style={styles.AuthIcon}></View>
-          <View style={styles.AuthIcon}></View>
-          <View style={styles.AuthIcon}></View>
-        </View>
-        <View style={{flexDirection:'row',width: '99%',justifyContent:'center',marginTop:30}}> 
+        </Animated.View>
+      </Animated.View>
+        <Animated.View entering={FadeInDown.delay(400).duration(700)} style={{flexDirection:'row',justifyContent:'space-around',paddingHorizontal:50,marginTop:20}}>
+          <TouchableOpacity style={styles.AuthIcon}>
+            <Image source={require('../assets/image/Facebook.png')}
+            style={{width:'100%',height:'100%'}}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.AuthIcon}>
+            <Image source={require('../assets/image/Google.png')}
+            style={{width:'100%',height:'100%'}}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.AuthIcon}>
+            <Image source={require('../assets/image/Twitter.png')}
+            style={{width:'100%',height:'100%'}}
+            />
+          </TouchableOpacity>
+        </Animated.View>
+        <Animated.View  entering={FadeInDown.delay(400).duration(700)} style={{flexDirection:'row',width: '99%',justifyContent:'center',marginTop:30}}> 
         <Text style={{color:'white'}}>Don't have an account? </Text>
-        <TouchableOpacity><Text  style={{color:'#F1AC1C',fontWeight:'600'}}>Sing Up here!</Text></TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={()=>navigate('SingIn')}><Text  style={{color:'#F1AC1C',fontWeight:'600'}}>Sing Up here!</Text></TouchableOpacity>
+        </Animated.View>
     </SafeAreaView>
   )
 }
@@ -76,6 +98,8 @@ const styles = StyleSheet.create({
     width:50,
     height:50,
     backgroundColor:'white',
-    borderRadius:100
+    borderRadius:100,
+    alignItems:'center',
+    justifyContent:'center'
   }
 })

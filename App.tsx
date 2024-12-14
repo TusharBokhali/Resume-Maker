@@ -20,7 +20,7 @@ function App(): React.JSX.Element {
         backgroundColor="transparent"
         translucent={true}
       />
-        <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown:false}}>
+        <Stack.Navigator initialRouteName="Welcome" screenOptions={{headerShown:false}}>
           <Stack.Screen name="Welcome" component={Welcome}/>
           <Stack.Screen name="SingIn" component={SingIn}/>
           <Stack.Screen name="Login" component={Login}/>
