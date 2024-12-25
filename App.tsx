@@ -7,6 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SingIn from './Screen/SingIn';
 import Login from './Screen/Login';
 import Loader from './Screen/Loader';
+import Home from './Screen/Home';
 
 
 function App(): React.JSX.Element {
@@ -24,6 +25,7 @@ function App(): React.JSX.Element {
           <Stack.Screen name="Welcome" component={Welcome}/>
           <Stack.Screen name="SingIn" component={SingIn}/>
           <Stack.Screen name="Login" component={Login}/>
+          <Stack.Screen name="Home" component={Home}/>
           <Stack.Screen name="Loader" component={Loader}/>
         </Stack.Navigator>
       </NavigationContainer>

@@ -9,7 +9,7 @@ export default function Loader() {
         <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <LoaderKit
                 style={{ width: 50, height: 50 }}
-                name={'BallPulseSync'}
+                name={'BallScaleMultiple'}
                 color={'blue'}
             />
         </SafeAreaView>

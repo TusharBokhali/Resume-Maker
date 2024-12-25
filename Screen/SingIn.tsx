@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { View, Text, TouchableOpacity, Image, StyleSheet, TextInput, StatusBar } from 'react-native'
+import { View, Text, TouchableOpacity, Image, StyleSheet, TextInput, StatusBar, useWindowDimensions, Alert } from 'react-native'
 import React, { useState } from 'react'
 import Animated, { FadeIn, FadeInDown, FadeInLeft, FadeInUp } from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
+import axios from 'axios'
 
 export default function SingIn() {
   const { navigate, goBack } = useNavigation();
@@ -11,6 +12,30 @@ export default function SingIn() {
   const [username,setUsername] = useState('');
   const [Password,setPassword] = useState('')
   const [email,setEmail] = useState('')
+
+  const SingUp = () =>{
+    try {
+      axios.post('https://interviewhub-3ro7.onrender.com/admin/signup',{
+         "email" : email,
+         "password" : Password,
+      }).then((res)=>{
+        if(res.data){
+          Alert.alert('Successfully Account Created');
+          setEmail('')
+          setPassword('')
+          setUsername('')
+          navigate('Login');
+        }
+      }).catch((e)=>{
+        Alert.alert('Already Account Created');
+      });
+    } catch (error) {
+      console.log(error); 
+    }
+  }
+
+    const {width} = useWindowDimensions();
+  
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -18,10 +43,11 @@ export default function SingIn() {
         backgroundColor="transparent"
         translucent={true}
       />
-      <Animated.View style={styles.Main} entering={FadeInUp.delay(400).duration(700)}>
+      <Animated.View style={[styles.Main,{width:width-'20%'}]} entering={FadeInUp.delay(400).duration(700)}>
         <Animated.Image entering={FadeInUp.delay(300).duration(600)} source={require('../assets/image/3dCaroon.png')}
-          style={{ width: 250, height: 250, alignSelf: 'center' }}
-          resizeMode='contain'
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{ width: 200, height: 200, alignSelf: 'center' }}
+          resizeMode="contain"
         />
         <Animated.Text entering={FadeInLeft.delay(300).duration(600)} style={{ marginVertical: 5 }}>username</Animated.Text>
 
@@ -44,8 +70,6 @@ export default function SingIn() {
           />
         </Animated.View>
 
-
-
         <Animated.Text entering={FadeInLeft.delay(300).duration(600)} style={{ marginVertical: 5 }}>Password</Animated.Text>
         <Animated.View entering={FadeInLeft.delay(300).duration(600)} style={styles.InputType}>
           <TextInput
@@ -59,8 +83,8 @@ export default function SingIn() {
           <Text style={{ textAlign: 'right', marginBottom: 40 }}>Forgot Password?</Text>
         </TouchableOpacity>
         <Animated.View entering={FadeIn.delay(400).duration(700)}>
-          <TouchableOpacity style={styles.BTN}>
-            <Text style={{ textAlign: 'center', color: 'white', fontSize: 18, fontWeight: '600' }}>Login</Text>
+          <TouchableOpacity style={styles.BTN} onPress={()=>SingUp()}>
+            <Text style={{ textAlign: 'center', color: 'white', fontSize: 18, fontWeight: '600' }}>Singin</Text>
           </TouchableOpacity>
         </Animated.View>
       </Animated.View>
@@ -95,7 +119,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#5C4E7E',
   },
   Main: {
-    height: '80%',
     backgroundColor: 'white',
     padding: 20,
     borderBottomLeftRadius: 70,
