@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, StatusBar, Image, TouchableOpacity } from 'reac
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import Animated, { FadeIn, FadeInDown, FadeInLeft, FadeInUp, FadeOut } from 'react-native-reanimated';
+// import  { FadeIn, FadeInDown, FadeInLeft, FadeInUp, FadeOut } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from './Loader';
 
@@ -22,10 +22,9 @@ export default function Welcome() {
   const fetchUserData = async () => {
     try {
       let duplicate = await AsyncStorage.getItem('user');
-      let data = JSON.parse(duplicate || '');
+      let data = duplicate ? JSON.parse(duplicate) : null; // Safely handle null
       if (data) {
         navigation.replace('Home');
-        
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -33,39 +32,40 @@ export default function Welcome() {
       setLoading(false);
     }
   };
+  
   return (
    <View style={{flex:1}}>
       {
         isLoading ? (
           <Loader />
         ) :(
-          <Animated.View style={styles.container} entering={FadeInLeft.delay(200).duration(400)}>
+          <View style={styles.container}>
           <View style={styles.FirstWhite}>
           <StatusBar
           barStyle="light-content"
           backgroundColor="transparent"
           translucent={true} 
         />
-          <Animated.Text style={{fontSize:35,color:'black',fontWeight:'600',fontFamily:'Jaldi-Bold'}} entering={FadeInUp.delay(300).duration(600)}>Welcome</Animated.Text>
-        <Animated.Image source={require('../assets/image/WelcomeFirst.png')} 
+          <Text style={{fontSize:35,color:'black',fontWeight:'600',fontFamily:'Jaldi-Bold'}}>Welcome</Text>
+        <Image source={require('../assets/image/WelcomeFirst.png')} 
         style={{
           width:250,
           height:250,
           resizeMode:'contain'
         }}
-        entering={FadeInLeft.delay(300).duration(600)}
+        
         />
         <View>
-        <Animated.Text style={{fontSize:22,fontWeight:'600',letterSpacing:0.8,textAlign:'center',marginVertical:10}} entering={FadeInUp.delay(400).duration(700)}>Resume Maker</Animated.Text>
-        <Animated.Text style={{letterSpacing:0.6,textAlign:'center',fontSize:16,fontWeight:'500',lineHeight:30,fontFamily:'Jaldi-Regular'}} entering={FadeInUp.delay(400).duration(700)}>Craft your perfect resume effortlessly with Me Resume Maker!</Animated.Text>
+        <Text style={{fontSize:22,fontWeight:'600',letterSpacing:0.8,textAlign:'center',marginVertical:10}} >Resume Maker</Text>
+        <Text style={{letterSpacing:0.6,textAlign:'center',fontSize:16,fontWeight:'500',lineHeight:30,fontFamily:'Jaldi-Regular'}} >Craft your perfect resume effortlessly with Me Resume Maker!</Text>
         </View>
           </View>
-          <Animated.View entering={FadeInDown.delay(400).duration(700)}>
+          <View>
           <TouchableOpacity style={styles.BTN} onPress={()=>navigation.navigate('Login')}>
             <Text style={{textAlign:'center',color:'white',fontSize:18,fontWeight:'600'}}>Get Started</Text>
           </TouchableOpacity>
-          </Animated.View>
-      </Animated.View>
+          </View>
+      </View>
         )
       }
    </View>

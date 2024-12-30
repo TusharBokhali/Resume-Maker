@@ -7,8 +7,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/core';
 export default function Home() {
   const [users,setusers] = useState()
+  const {navigate} = useNavigation();
   useEffect(()=>{
     const fetch = async() =>{
       let dub = await AsyncStorage.getItem('user');
@@ -25,9 +27,20 @@ export default function Home() {
     require('../assets/image/images2.png'),
   ];
 
+  const PolularResume = [
+    require('../assets/image/Cv1.png'),
+    // require('../assets/image/Cv2.png'),
+    require('../assets/image/Cv3.png'),
+    require('../assets/image/Cv4.png'),
+    require('../assets/image/Cv5.png'),
+    require('../assets/image/Cv6.png'),
+    require('../assets/image/Cv7.png'),
+    require('../assets/image/Cv8.png'),
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
 
       <View style={styles.Profile}>
         <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center', }}>
@@ -58,16 +71,17 @@ export default function Home() {
             </TouchableOpacity>
           )}
           horizontal
+          showsHorizontalScrollIndicator={false}
           />
         </View>
         <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-          <TouchableOpacity style={{width:155,height:210,marginTop:20,borderRadius:20,backgroundColor:'#F3CC5C'}}>
+          <TouchableOpacity style={{width:width/2 -30,height:210,marginTop:20,borderRadius:20,backgroundColor:'#F3CC5C'}} onPress={()=>navigate('CreateResume')}>
             <Image source={require('../assets/image/createresume.png')} style={{width: 130,height:130}}/>
             <Text style={{paddingHorizontal:10,fontWeight:'600',fontSize:18}}>Create Resume</Text>
             <Text style={{paddingHorizontal:10,color:'#97825B'}}>Build your resume from scratch</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{width:155,height:210,marginTop:20,borderRadius:20,backgroundColor:'#7AC391'}}>
+          <TouchableOpacity style={{width:width/2 -30,height:210,marginTop:20,borderRadius:20,backgroundColor:'#7AC391'}}>
             <Image source={require('../assets/image/yourresume.png')} style={{width: 130,height:130}}/>
             <Text style={{paddingHorizontal:10,fontWeight:'600',fontSize:18}}>Your Resume</Text>
             <Text style={{paddingHorizontal:10,color:'#97825B'}}>A glimps at how your resume looks.</Text>
@@ -85,6 +99,19 @@ export default function Home() {
           <View style={{width:'50%',paddingRight:15}}>
             <Image source={require('../assets/image/Templates.png')} style={{width:'100%',height:'70%',}}/>
           </View>
+        </View>
+        <Text style={{marginTop:10,fontSize:18,fontWeight:'600'}}>Popular Resumes</Text>
+        <View style={{marginTop:20,flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between',gap:10}}>
+          {
+            PolularResume.map((el,inx)=>{
+              return (
+                <TouchableOpacity key={inx}>
+                <Image source={el} style={{width:width/2 - 25,height:250,borderRadius:20}}/>
+              </TouchableOpacity>
+              )
+            })
+          }
+       
         </View>
 </ScrollView>
     </SafeAreaView>

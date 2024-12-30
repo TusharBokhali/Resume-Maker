@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { View, Text, TouchableOpacity, Image, StyleSheet, TextInput, StatusBar, useWindowDimensions, Alert } from 'react-native'
 import React, { useState } from 'react'
-import Animated, { FadeIn, FadeInDown, FadeInLeft, FadeInUp } from 'react-native-reanimated'
+// import Animated, { FadeIn, FadeInDown, FadeInLeft, FadeInUp } from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
@@ -43,52 +43,52 @@ export default function SingIn() {
         backgroundColor="transparent"
         translucent={true}
       />
-      <Animated.View style={[styles.Main,{width:width-'20%'}]} entering={FadeInUp.delay(400).duration(700)}>
-        <Animated.Image entering={FadeInUp.delay(300).duration(600)} source={require('../assets/image/3dCaroon.png')}
+      <View style={[styles.Main,{width:width-'20%'}]}>
+        <Image source={require('../assets/image/3dCaroon.png')}
           // eslint-disable-next-line react-native/no-inline-styles
           style={{ width: 200, height: 200, alignSelf: 'center' }}
           resizeMode="contain"
         />
-        <Animated.Text entering={FadeInLeft.delay(300).duration(600)} style={{ marginVertical: 5 }}>username</Animated.Text>
+        <Text style={{ marginVertical: 5 }}>username</Text>
 
-        <Animated.View entering={FadeInLeft.delay(300).duration(600)} style={[styles.InputType]} >
+        <View  style={[styles.InputType]} >
           <TextInput
           style={[styles.Input]}
           placeholder='Enter username' 
           onChangeText={setUsername}
           value={username}
           />
-        </Animated.View>
+        </View>
 
-        <Animated.Text entering={FadeInLeft.delay(300).duration(600)} style={{ marginVertical: 5 }}>Email</Animated.Text>
-        <Animated.View entering={FadeInLeft.delay(300).duration(600)} style={[styles.InputType]} >
+        <Text style={{ marginVertical: 5 }}>Email</Text>
+        <View style={[styles.InputType]} >
           <TextInput 
           style={[styles.Input]}
           placeholder='Enter Email' 
           value={email}
           onChangeText={setEmail}
           />
-        </Animated.View>
+        </View>
 
-        <Animated.Text entering={FadeInLeft.delay(300).duration(600)} style={{ marginVertical: 5 }}>Password</Animated.Text>
-        <Animated.View entering={FadeInLeft.delay(300).duration(600)} style={styles.InputType}>
+        <Text style={{ marginVertical: 5 }}>Password</Text>
+        <View style={styles.InputType}>
           <TextInput
           style={styles.Input}
           placeholder='Enter Password' 
           onChangeText={setPassword}
           value={Password}
           />
-        </Animated.View>
+        </View>
         <TouchableOpacity>
           <Text style={{ textAlign: 'right', marginBottom: 40 }}>Forgot Password?</Text>
         </TouchableOpacity>
-        <Animated.View entering={FadeIn.delay(400).duration(700)}>
+        <View>
           <TouchableOpacity style={styles.BTN} onPress={()=>SingUp()}>
             <Text style={{ textAlign: 'center', color: 'white', fontSize: 18, fontWeight: '600' }}>Singin</Text>
           </TouchableOpacity>
-        </Animated.View>
-      </Animated.View>
-      <Animated.View entering={FadeInDown.delay(400).duration(700)} style={{ flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 50, marginTop: 20 }}>
+        </View>
+      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 50, marginTop: 20 }}>
         <TouchableOpacity style={styles.AuthIcon}>
           <Image source={require('../assets/image/Facebook.png')}
             style={{ width: '100%', height: '100%' }}
@@ -104,11 +104,11 @@ export default function SingIn() {
             style={{ width: '100%', height: '100%' }}
           />
         </TouchableOpacity>
-      </Animated.View>
-      <Animated.View entering={FadeInDown.delay(400).duration(700)} style={{ flexDirection: 'row', width: '99%', justifyContent: 'center', marginTop: 30 }}>
+      </View>
+      <View style={{ flexDirection: 'row', width: '99%', justifyContent: 'center', marginTop: 30 }}>
         <Text style={{ color: 'white' }}>Don't have an account? </Text>
         <TouchableOpacity onPress={() => navigate('Login')}><Text style={{ color: '#F1AC1C', fontWeight: '600' }}>Sing In here!</Text></TouchableOpacity>
-      </Animated.View>
+      </View>
     </SafeAreaView>
   )
 }

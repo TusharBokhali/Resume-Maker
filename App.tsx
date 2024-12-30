@@ -1,3 +1,4 @@
+/* eslint-disable jsx-quotes */
 import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,6 +9,10 @@ import SingIn from './Screen/SingIn';
 import Login from './Screen/Login';
 import Loader from './Screen/Loader';
 import Home from './Screen/Home';
+// import Tabbar from './Screen/Tabbar';
+import CreateResume from './Components/CreateResume';
+import Education from './Components/Education';
+
 
 
 function App(): React.JSX.Element {
@@ -21,12 +26,14 @@ function App(): React.JSX.Element {
         backgroundColor="transparent"
         translucent={true}
       />
-        <Stack.Navigator initialRouteName="Welcome" screenOptions={{headerShown:false}}>
+        <Stack.Navigator initialRouteName="Education" screenOptions={{headerShown:false}}>
           <Stack.Screen name="Welcome" component={Welcome}/>
           <Stack.Screen name="SingIn" component={SingIn}/>
           <Stack.Screen name="Login" component={Login}/>
           <Stack.Screen name="Home" component={Home}/>
           <Stack.Screen name="Loader" component={Loader}/>
+         <Stack.Screen name='CreateResume' component={CreateResume}/>
+         <Stack.Screen name='Education' component={Education}/>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
